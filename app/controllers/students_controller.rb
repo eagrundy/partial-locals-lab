@@ -21,8 +21,12 @@ class StudentsController < ApplicationController
   end
 
   def index
+    if params.has_key?(:query)
+      @students = Student.search(params[:query])
+    else
     @students = Student.all
   end
+end
 
   def student_params
     params.require(:student).permit(:name, :birthday, :hometown)
